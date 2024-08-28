@@ -48,4 +48,18 @@ This table is a representation of the "states" of those switches - 0 repersentin
  
 Now 91 is a number using *one* interpretation. It can also be interpreted as a character **[** if we apply the [ASCII](https://en.wikipedia.org/wiki/ASCII) "encoding" standards. Thus the electronics in computers can control and manipulate bits or switches which is represented as "information" by applying appropriate encoding standards. 
 > Instructing the computer how to manipulate electronic circuits in the form of processors and memory and interpret the resulting information is precisely what is done by computer programmers!
-Typical computer programmers do not operate at the level in which they think in terms of bits. The lowest level of tasks including bit manipulation are made available in simple English language like "instructions" for various types of CPUs. They are interpreted as binary values by that processor. 
+
+ A human when given a a simple instruction such as "Write your name" will break it into the following activities:
+
+- Find a pen/pencil
+- Find the paper to write the name on
+- Hold the pen in the appropriate hand
+- Write his/her name   
+
+As one can see, the simple instruction is broken down into many smaller steps. The process of hiding the detailed step is called as abstraction. The simple intruction is set to be working on a **higher** level of abstraction while the detailed steps are set to be at a **lower** level of abstraction.  Similarly, typical computer programmers do not operate at the level in which they think in terms of bits i.e. at one of the *lowest* level of abstraction. Instead, tasks such as bit manipulation are made available in simple English language like "instructions" and are called as **Instruction Sets** for the CPU. This is also called as machine code. Most modern day programs do not operate at this level either, and rely on programming languages at a much *higher* level of abstraction, which are then translated into low level machine code or instrcution sets by a software called as a **compiler**.
+
+Working at a higher level allows us to create complex things but the higher levels of abstractions have to be ultimately translated into lowest level of instructions. Depending on the programming language, there are different methods used to deal with these different levels of abstraction:
+
+- For languages like C, C++, Fortran, the compiler takes the entire program as input and emits an executable file which is full of machine code. Such programming languages are called compiled languages. They typicallu result in extremely fast running program which is optimized for a specific CPU architecture and operating system albeit at the cost of portability to other operating systems and CPU architectures.
+- In languages such as BASIC, LISP etc, programs are interpreted "line by line" and executed immediately. This means that as long as an interpreter is available for a OS/platform, the same program will work and it is fantastic for portability. However, programs run using interpreted languages tend to run slowly albeit they are slightly easier to debug.
+- Modern languages such as Python and Java used another approach - they are compiled to an intermediate format thus making portability easier and then they are compiled using just in time compilers to get the speed advantage of compiled languages. They require a software environment to operate in, ususaly called as  the "virtual machine" which does the just in time compilation as well as execution.  
