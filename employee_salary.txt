@@ -1,0 +1,9 @@
+employee_name,salary,month,dept
+John,388,Jan,dept1
+John,20,Feb,dept2
+John,30,Mar,dept1
+John,40,Apr,dept2
+Sarah,100,Jan,dept1
+Sarah,2,Feb,dept2
+Sarah,322,Mar,dept1
+Sarah,402,Apr,dept2
