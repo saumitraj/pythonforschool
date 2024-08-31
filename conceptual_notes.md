@@ -49,6 +49,7 @@ This table is a representation of the "states" of those switches - 0 repersentin
 Now 91 is a number using *one* interpretation. It can also be interpreted as a character **[** if we apply the [ASCII](https://en.wikipedia.org/wiki/ASCII) "encoding" standards. Thus the electronics in computers can control and manipulate bits or switches which is represented as "information" by applying appropriate encoding standards. 
 > Instructing the computer how to manipulate electronic circuits in the form of processors and memory and interpret the resulting information is precisely what is done by computer programmers!
 
+ # The concept of Abstraction, Compiled Lanaguages and Interpreted Languages
  A human when given a a simple instruction such as "Write your name" will break it into the following activities:
 
 - Find a pen/pencil
@@ -62,4 +63,60 @@ Working at a higher level allows us to create complex things but the higher leve
 
 - For languages like C, C++, Fortran, the compiler takes the entire program as input and emits an executable file which is full of machine code. Such programming languages are called compiled languages. They typicallu result in extremely fast running program which is optimized for a specific CPU architecture and operating system albeit at the cost of portability to other operating systems and CPU architectures.
 - In languages such as BASIC, LISP etc, programs are interpreted "line by line" and executed immediately. This means that as long as an interpreter is available for a OS/platform, the same program will work and it is fantastic for portability. However, programs run using interpreted languages tend to run slowly albeit they are slightly easier to debug.
-- Modern languages such as Python and Java used another approach - they are compiled to an intermediate format thus making portability easier and then they are compiled using just in time compilers to get the speed advantage of compiled languages. They require a software environment to operate in, ususaly called as  the "virtual machine" which does the just in time compilation as well as execution.  
+- Modern languages such as Python and Java used another approach - they are compiled to an intermediate format thus making portability easier, and then they are "compiled" to machine code using just in time compilers albeit line by line so behave like interpreted language. They require a software environment to operate in, ususaly called as  the "virtual machine" which does the just in time compilation as well as line by line execution. These languages give us speeds of execution close to that of purely compiled languages but all the advantages of interpreted languages such as ease of development, ability to debug using tools.
+
+Some good references to read about this topic: [Indiana University Knowledge Base](https://kb.iu.edu/d/agsz),[Baeldung](https://www.baeldung.com/cs/compiled-vs-interpreted-languages)
+
+# Understanding the core concepts in Python
+
+These notes will only cover the core concepts useful to get us started with AI/ML using Python and assumes a basic familiarity with the languages. However, the reader is encourage to go through the basics of Python using a good text book or from the [original sources](https://wiki.python.org/moin/BeginnersGuide) There are also excellent free courses available on platforms such as [SWAYAM/NPTEL](https://swayam.gov.in/), [Google}(https://developers.google.com/edu/python),[Learn Python](https://www.learnpython.org/) et al. 
+
+## Lists
+Let us start with a basic datastructure: list. A list is simply a way to keep different information together, have means of accessing it using an index, find specific values, apply sorting and so forth. To create a list, one simply puts the collection of values in a square brackets([]), each value being separated by a comma (,)
+
+` my_list_of_even_numbers = [2,4,6,8,10]`
+
+Python lists need not have just one data type. They can also take mixed values:
+
+`my_mixed_list = [10,'John Doe',20,30,'ABC','@@@@'] `
+
+The most obvious operation on any list would be an ability to access elements using simple index. Take a look at the list of even numbers and how it is indexed:
+
+| 0 | 1 | 2 | 3 | 4  |
+|---|---|---|---|----|
+| 2 | 4 | 6 | 8 | 10 |
+
+The top row starts is the index, the bottom row is the actual value. Note that the first value **starts with an index with a value of 0**. So to print the *third* element in the list (the number 6) we simply write `print(my_list_of_even_numbers[2])` 
+
+The length of the list given by the function **len** and one can see that index of the last element in the list is *len(list) -1* given that the first element has an index of 0
+
+Sometimes, it is convenient to start from the last elelemnt in the list and Python has a nifty syntax for that: Usage of negative index numbers starting with -1 referring to the last element of the list and then going further of the negative number line until the first element of the list is reached. Therefore,
+`print(my_mixed_list[-1])` will print **@@@@** while `print(my_mixed_list[-6])` will print **10**
+
+Lists can be **merged** simply by adding them:
+` my_list_of_even_numbers = [2,4,6,8,10]
+  my_list_of_odd_numbers = [1,3,5,7,9]
+  merged_list = my_list_of_even_numbers + my_list_of_odd_numbers`
+
+Printing the merged list will ofcourse lead to 
+`print(merged_list)`
+> 2,4,6,8,10,3,5,7,9
+
+Note that the lists are merged by appending the second list at the end of the first one. If you want an order in the list, you will need to sort it.
+
+Another important operation with lists is an ability to create sub lists from an existing list. This sub list is called a **slice**. As an example, consider this list of names:
+`list_of_names = ['Amit','Bhavesh','Chaitanya','Dilshad','Emraan','Faizan','Gargi','Hrishi']`
+Now if I want a sublist with every second name in the list, I can do that by creating a sublist a.k.a. slice from this list:
+`sub_list_1 = list_of_names[1:8:2]`
+Note the syntax for creating a slice within the square brackets:
+
+| Start Index | End Index +1 | Step |
+|-------------|--------------|------|
+
+Start index refers to where to start slicing; end index has a 1 added to it because indices start at 0, hence the second parameter needs a one added to it; the third parameter is a step function which tells python to skip certain number of elements after starting from start index. 
+> Slicing does not change the original list; it creates a new list that is made by copying only those elements from the original list which need to be part of the sub list as defined by the slicing parameters.
+
+Strings in Python also support slicing function and work in a similar manner. However, ** strings in python are immutable i.e. they cannot be changed and any change to a string results in the creation of a new string! ** In lists, values *can* be changed in place. Slicing, of course, results in new lists.
+
+
+
