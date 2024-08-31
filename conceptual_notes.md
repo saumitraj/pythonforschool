@@ -44,7 +44,7 @@ Consider this table:
 This table is a representation of the "states" of those switches - 0 repersenting a OFF and 1 representing an ON. How do we interpret these states? 
 - One way of interpreting this state is to simply look at these states being a binary number and convert binary to decimal using powers of two i.e. 01011011 can be written starting from units place as
   - 1x2<sup>0</sup> + 1x2<sup>1</sup> + 0x2<sup>2</sup> + 1x2<sup>3</sup> + 1x2<sup>4</sup> + 0x2<sup>5</sup> + 1x2<sup>6</sup> + 0x2<sup>7</sup>
-  - = 1+2+0+8+16+0+64+0 = 91!
+   = 1+2+0+8+16+0+64+0 = 91
  
 Now 91 is a number using *one* interpretation. It can also be interpreted as a character **[** if we apply the [ASCII](https://en.wikipedia.org/wiki/ASCII) "encoding" standards. Thus the electronics in computers can control and manipulate bits or switches which is represented as "information" by applying appropriate encoding standards. 
 > Instructing the computer how to manipulate electronic circuits in the form of processors and memory and interpret the resulting information is precisely what is done by computer programmers!
