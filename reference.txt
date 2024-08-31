@@ -1,0 +1,6 @@
+mylist = [*range(1,11,1)]
+two_table = pd.DataFrame(mylist).rename(columns={ : "base"})
+
+
+
+two_table['output'] = two_table['base']*2

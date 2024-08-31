@@ -1,0 +1,7 @@
+Location,Q1,Q2,Q3,Q4
+Kothrud,30,40,25,30
+Aundh,35,45,20,35
+Prabhat Road,20,20,20,20
+Camp,40,40,35,30
+Hadapsar,50,55,45,40
+Wagholi,40,20,35,35
