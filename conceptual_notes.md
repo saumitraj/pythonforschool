@@ -116,6 +116,11 @@ Note the syntax for creating a slice within the square brackets:
 Start index refers to where to start slicing; end index has a 1 added to it because indices start at 0, hence the second parameter needs a one added to it; the third parameter is a step function which tells python to skip certain number of elements after starting from start index. 
 > Slicing does not change the original list; it creates a new list that is made by copying only those elements from the original list which need to be part of the sub list as defined by the slicing parameters.
 
+A little bit about mixed lists - lists that contain elements of different data types: Good software engineering practices will require us to never have mixed lists as they can be complicated to handle due to the presence of different data types. This can also lead to applications with *bugs*, i.e. applications that stop working/ fail or work incorrectly and can create havoc for the end users. The question then is: Why does Python support such a structure containing different types of elements?
+
+The answer lies in the fact that when a list is efined in Python with values, internally each value is stored within a memory location and python interpreter merely maintains a list of memory locations. e.g. in a list like this:
+`list_some_list = {1,2,"XYZ"}`
+the python interpreter internally stores the memory location of the values 1, 2 and XYZ. The indices we use to access elements of the list are internally mapped to the memory locations. As the memory locations can contain value of *any* datatype, it is possible to have 
 Strings in Python also support slicing function and work in a similar manner. However, ** strings in python are immutable i.e. they cannot be changed and any change to a string results in the creation of a new string! ** In lists, values *can* be changed in place. Slicing, of course, results in new lists.
 
 
