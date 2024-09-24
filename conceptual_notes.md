@@ -119,9 +119,39 @@ Start index refers to where to start slicing; end index has a 1 added to it beca
 A little bit about mixed lists - lists that contain elements of different data types: Good software engineering practices will require us to never have mixed lists as they can be complicated to handle due to the presence of different data types. This can also lead to applications with *bugs*, i.e. applications that stop working/ fail or work incorrectly and can create havoc for the end users. The question then is: Why does Python support such a structure containing different types of elements?
 
 The answer lies in the fact that when a list is efined in Python with values, internally each value is stored within a memory location and python interpreter merely maintains a list of memory locations. e.g. in a list like this:
-`list_some_list = {1,2,"XYZ"}`
-the python interpreter internally stores the memory location of the values 1, 2 and XYZ. The indices we use to access elements of the list are internally mapped to the memory locations. As the memory locations can contain value of *any* datatype, it is possible to have 
-Strings in Python also support slicing function and work in a similar manner. However, ** strings in python are immutable i.e. they cannot be changed and any change to a string results in the creation of a new string! ** In lists, values *can* be changed in place. Slicing, of course, results in new lists.
+
+`some_list = {1,2,"XYZ"}`
+
+the python interpreter internally stores the memory location of the values 1, 2 and XYZ. The indices we use to access elements of the list are internally mapped to the memory locations. As the memory locations can contain value of *any* datatype, it is possible to have lists with mixed values! Look at the diagram below to understand this:
+![Memory Locations and Lists](MemoryLocation.png)
+
+In the diagram, the first table illustrates the concept - in each row, you can see a list index in square brackets, followed by a hexadecimal number which represents a memory location followed by its decimal equivalent in brackets. Each row in first table is mapped to the corresponding value in the second table. As you can see, any memory location can "point to" a value of any type in memory and hence lists can take multiple data types.  
+
+> Note that as a Python developer, we really don't care about the actual value of the memory location as the details are nicely hidden by the fact that we simply refer to those memory locations by the convinience of indices! Why have we chosen hexadecimal number system for addressing memory location? Suffice to say that as there are huge number of memory locations, it is simply more convinient to use hexadecimals! If you want to read this in details, you can find a [good write up here](http://www.facweb.iitkgp.ac.in/~bibhas/Hex_Memory_Addressing.pdf)
+
+So what is the significance of mixed lists? As called out earlier, from a point of view of good software engineering practices, one would avoid mixed lists. However, when we are dealing with topics related to data, especially when we get data from multiple different sources such as sensors, machines and other computers, mixed lists become a convenient feature to have. Sometimes, it is quite useful to provide "helper functions" to such mixed lists to help the Python interpreter deal with them! e.g.,
+
+`mixed_list = [10,"Cat",40,"Dog","Tiger",3.14,"Parrot"]`
+  
+  `def sorthelper(element):`
+  
+    `if isinstance(element,int)`
+    
+      `return (0,int(element),'')`
+      
+    `elif isinstance(element,float)
+    `
+      `return (1,float(element))`
+      
+    `return (2,element,'')`
+    
+  `mixed_list.sort(key=sorthelper)`
+  
+  `print(mixed_list)`
+  
+ will yield the output [10, 40, 3.14, 'Cat', 'Dog', 'Parrot', 'Tiger']
+
+Strings in Python also support slicing function and work in a similar manner. However, ** strings in python are immutable i.e. they cannot be changed and any change to a string results in the creation of a new string! ** In lists, values *can* be changed in place. Slicing, of course, results in creation of new lists.
 
 
 
