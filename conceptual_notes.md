@@ -152,7 +152,32 @@ So what is the significance of mixed lists? As called out earlier, from a point 
   
  will yield the output [10, 40, 3.14, 'Cat', 'Dog', 'Parrot', 'Tiger']
 
-Strings in Python also support slicing function and work in a similar manner. However, ** strings in python are immutable i.e. they cannot be changed and any change to a string results in the creation of a new string! ** In lists, values *can* be changed in place. Slicing, of course, results in creation of new lists.
+Strings in Python also support slicing function and work in a similar manner. However, ** strings in python are immutable i.e. they cannot be changed and any change to a string results in the creation of a new string! ** In lists, values *can* be changed in place. Slicing, of course, results in creation of new lists. Strings can be created using single, double or even triple quotes!
+E.g.,
 
+`city = 'Pune' `
+
+is the same as 
+
+`city = "Pune"` 
+
+and 
+
+`city = '''Pune'''`
+
+While creating a string with a single or double quote and if one needs to add a quote within the string itself, one uses the escape sequence:
+
+`name_of_a_book = 'The "Hitchhiker\'s" guide to the Galaxy'`
+
+or 
+
+`name_of_a_book = "The \"Hitchhiker's\" guide to the Galaxy'`
+
+Using triple quote is a convinient way to avoid escape sequences!
+
+`name_of_a_book = '''The "Hitchhiker's" guide to the Galaxy'`
+
+
+#Numpy and Matplotlib
 
 
