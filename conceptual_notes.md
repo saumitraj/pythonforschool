@@ -118,7 +118,7 @@ Start index refers to where to start slicing; end index has a 1 added to it beca
 
 A little bit about mixed lists - lists that contain elements of different data types: Good software engineering practices will require us to never have mixed lists as they can be complicated to handle due to the presence of different data types. This can also lead to applications with *bugs*, i.e. applications that stop working/ fail or work incorrectly and can create havoc for the end users. The question then is: Why does Python support such a structure containing different types of elements?
 
-The answer lies in the fact that when a list is efined in Python with values, internally each value is stored within a memory location and python interpreter merely maintains a list of memory locations. e.g. in a list like this:
+The answer lies in the fact that when a list is defined in Python with values, internally each value is stored within a memory location and python interpreter merely maintains a list of memory locations. e.g. in a list like this:
 
 `some_list = {1,2,"XYZ"}`
 
