@@ -1,0 +1,14 @@
+# RAG Chatbot Dependencies
+fastapi==0.110.0
+uvicorn==0.29.0
+streamlit==1.32.0
+langchain==0.3.27
+langchain-core==0.3.83
+langchain-community==0.3.31
+langchain-ollama==0.3.10
+langchain-text-splitters==0.3.11
+langchain-chroma==0.2.6
+chromadb==1.5.1
+pypdf==4.1.0
+python-dotenv==1.0.1
+pydantic>=2.0.0

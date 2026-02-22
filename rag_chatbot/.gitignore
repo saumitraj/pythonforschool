@@ -1,0 +1,17 @@
+# Environments
+venv/
+.venv/
+env/
+__pycache__/
+*.pyc
+*.pyo
+
+# Databases
+chroma_db/
+parent_store/
+
+# Environment Variables
+.env
+
+# OS Files
+.DS_Store
