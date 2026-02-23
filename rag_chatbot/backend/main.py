@@ -1,4 +1,4 @@
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, UploadFile, File
 from pydantic import BaseModel
 import backend.rag as rag_module
 
@@ -72,6 +72,27 @@ def chat_with_rag(request: QueryRequest):
         return QueryResponse(answer=answer)
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Query failed: {str(e)}")
+
+@app.post("/upload")
+def upload_file(file: UploadFile = File(...)):
+    """
+    Accepts a PDF file and saves it to the PDFFiles directory.
+    """
+    import os
+    import shutil
+    
+    if not file.filename.endswith(".pdf"):
+        raise HTTPException(status_code=400, detail="Only PDF files are allowed.")
+        
+    os.makedirs(rag_module.DATA_PATH, exist_ok=True)
+    file_path = os.path.join(rag_module.DATA_PATH, file.filename)
+    
+    try:
+        with open(file_path, "wb") as buffer:
+            shutil.copyfileobj(file.file, buffer)
+        return {"message": f"Successfully uploaded {file.filename}"}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Failed to save file: {e}")
 
 @app.post("/flush-cache", response_model=CacheResponse)
 def flush_cache():

@@ -1,5 +1,6 @@
 # RAG Chatbot Dependencies
 fastapi==0.110.0
+python-multipart==0.0.20
 uvicorn==0.29.0
 streamlit==1.32.0
 langchain==0.3.27

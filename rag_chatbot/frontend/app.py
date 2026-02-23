@@ -10,6 +10,22 @@ st.write("This chatbot uses LLaMA 3.1 and ChromaDB to answer questions based on 
 
 # Sidebar for indexing
 with st.sidebar:
+    st.header("Upload Document")
+    uploaded_file = st.file_uploader("Upload a PDF file to add to the RAG database", type=["pdf"])
+    if uploaded_file is not None:
+        if st.button("Upload File"):
+            with st.spinner("Uploading..."):
+                try:
+                    files = {"file": (uploaded_file.name, uploaded_file.getvalue(), "application/pdf")}
+                    res = requests.post(f"{FASTAPI_URL}/upload", files=files)
+                    if res.status_code == 200:
+                        st.success(f"Uploaded {uploaded_file.name} successfully! Please click 'Index Documents' below.")
+                    else:
+                        st.error(f"Error {res.status_code}: {res.text}")
+                except Exception as e:
+                    st.error(f"Failed to connect to FastAPI backend: {e}")
+    st.divider()
+
     st.header("Document Filter")
     # Fetch available files
     available_files = ["All Files"]
