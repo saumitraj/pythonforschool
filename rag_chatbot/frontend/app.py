@@ -10,22 +10,6 @@ st.write("This chatbot uses LLaMA 3.1 and ChromaDB to answer questions based on 
 
 # Sidebar for indexing
 with st.sidebar:
-    st.header("Upload Document")
-    uploaded_file = st.file_uploader("Upload a PDF file to add to the RAG database", type=["pdf"])
-    if uploaded_file is not None:
-        if st.button("Upload File"):
-            with st.spinner("Uploading..."):
-                try:
-                    files = {"file": (uploaded_file.name, uploaded_file.getvalue(), "application/pdf")}
-                    res = requests.post(f"{FASTAPI_URL}/upload", files=files)
-                    if res.status_code == 200:
-                        st.success(f"Uploaded {uploaded_file.name} successfully! Please click 'Index Documents' below.")
-                    else:
-                        st.error(f"Error {res.status_code}: {res.text}")
-                except Exception as e:
-                    st.error(f"Failed to connect to FastAPI backend: {e}")
-    st.divider()
-
     st.header("Document Filter")
     # Fetch available files
     available_files = ["All Files"]
@@ -36,45 +20,62 @@ with st.sidebar:
     except:
         pass
         
-    selected_file = st.selectbox("Chat with specific file:", available_files)
+    selected_file = st.selectbox("Chat with specific file:", available_files, label_visibility="collapsed")
     st.divider()
-    
-    st.header("Document Indexing")
-    st.write("Click below to flush the existing database and re-index all PDFs in the `PDFFiles/` folder.")
-    if st.button("Index Documents"):
-        with st.spinner("Indexing documents... This may take a while."):
-            try:
-                response = requests.post(f"{FASTAPI_URL}/index")
-                if response.status_code == 200:
-                    data = response.json()
-                    st.success(f"Success! {data.get('message')} - Chunks Indexed: {data.get('chunks_indexed')}")
-                else:
-                    st.error(f"Error {response.status_code}: {response.text}")
-            except Exception as e:
-                st.error(f"Failed to connect to FastAPI backend: {e}")
 
-    st.divider()
-    
-    st.header("Query Cache")
-    st.write("Responses are cached to speed up repeated questions. Click below to clear the cache.")
-    if st.button("Clear Cache"):
-        with st.spinner("Clearing cache..."):
-            try:
-                response = requests.post(f"{FASTAPI_URL}/flush-cache")
-                if response.status_code == 200:
-                    st.success("Query cache cleared!")
-                else:
-                    st.error(f"Error {response.status_code}: {response.text}")
-            except Exception as e:
-                st.error(f"Failed to connect to FastAPI backend: {e}")
-                
-    st.divider()
-    
-    st.header("Chat History")
-    st.write("Click below to clear the current chat messages from the screen.")
-    if st.button("Clear Chat History"):
-        st.session_state.messages = []
-        st.rerun()
+    with st.expander("📂 Manage Documents", expanded=False):
+        st.write("**Upload Document**")
+        uploaded_file = st.file_uploader("Upload a PDF file to add to the RAG database", type=["pdf"], label_visibility="collapsed")
+        if uploaded_file is not None:
+            if st.button("Upload File"):
+                with st.spinner("Uploading..."):
+                    try:
+                        files = {"file": (uploaded_file.name, uploaded_file.getvalue(), "application/pdf")}
+                        res = requests.post(f"{FASTAPI_URL}/upload", files=files)
+                        if res.status_code == 200:
+                            st.success(f"Uploaded {uploaded_file.name} successfully! Please click 'Index Documents' below.")
+                        else:
+                            st.error(f"Error {res.status_code}: {res.text}")
+                    except Exception as e:
+                        st.error(f"Failed to connect to FastAPI backend: {e}")
+        
+        st.divider()
+        
+        st.write("**Document Indexing**")
+        st.write("Click below to flush the existing database and re-index all PDFs in the `PDFFiles/` folder.")
+        if st.button("Index Documents"):
+            with st.spinner("Indexing documents... This may take a while."):
+                try:
+                    response = requests.post(f"{FASTAPI_URL}/index")
+                    if response.status_code == 200:
+                        data = response.json()
+                        st.success(f"Success! {data.get('message')} - Chunks Indexed: {data.get('chunks_indexed')}")
+                    else:
+                        st.error(f"Error {response.status_code}: {response.text}")
+                except Exception as e:
+                    st.error(f"Failed to connect to FastAPI backend: {e}")
+
+    with st.expander("⚙️ Advanced Settings", expanded=False):
+        st.write("**Query Cache**")
+        st.write("Responses are cached to speed up repeated questions. Click below to clear the cache.")
+        if st.button("Clear Cache"):
+            with st.spinner("Clearing cache..."):
+                try:
+                    response = requests.post(f"{FASTAPI_URL}/flush-cache")
+                    if response.status_code == 200:
+                        st.success("Query cache cleared!")
+                    else:
+                        st.error(f"Error {response.status_code}: {response.text}")
+                except Exception as e:
+                    st.error(f"Failed to connect to FastAPI backend: {e}")
+                    
+        st.divider()
+        
+        st.write("**Chat History**")
+        st.write("Click below to clear the current chat messages from the screen.")
+        if st.button("Clear Chat History"):
+            st.session_state.messages = []
+            st.rerun()
 
 # Initialize chat history
 if "messages" not in st.session_state:
