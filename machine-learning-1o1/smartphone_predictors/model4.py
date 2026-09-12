@@ -53,11 +53,11 @@ err_3 = mean_absolute_error(y_test, model_3.predict(X_test))
 base_pipeline = Pipeline([
     ('scaler', StandardScaler()),
     ('mlp', MLPRegressor(
-        hidden_layer_sizes=(64, 32),
+        hidden_layer_sizes=(16,),
         activation='relu',
         solver='adam',
         alpha=0.01,
-        learning_rate_init=0.005,
+        learning_rate_init=0.05,
         max_iter=1000,
         random_state=42
     ))
